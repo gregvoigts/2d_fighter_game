@@ -6,17 +6,13 @@ using Mirror;
 public class Shoulder : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 1;
-    public string axis = "Vertical";
     // Start is called before the first frame update
     void Start()
     {
-        axis = GetComponentInParent<Player>().controlles.MoveArm;
     }
 
-    void FixedUpdate()
+    public void RotateArm(float vert)
     {
-        var vert = Input.GetAxis(axis);
-
         var zAngle = vert * rotationSpeed;
 
         var newZ = transform.rotation.eulerAngles.z + zAngle;
