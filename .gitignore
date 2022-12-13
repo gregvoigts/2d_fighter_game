@@ -50,3 +50,5 @@ crashlytics-build.properties
 # Assets
 assets/mirror
 assets/ScriptTemplates
+.vscode/settings.json
+ProjectSettings/ShaderGraphSettings.asset
