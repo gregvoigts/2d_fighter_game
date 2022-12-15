@@ -194,7 +194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de91f08a2c86cac449214ccaa6caf279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunPrefab: {fileID: 8830339863893297673, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
 --- !u!1 &5793255692766641831
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42009223e88c6db4aa53398e020d022c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
+  syncDirection: 1
   syncMode: 0
   syncInterval: 0.1
   speed: 3
@@ -302,6 +301,7 @@ MonoBehaviour:
   jumpColdown: 3
   _maxHealth: 100
   squatHigh: 0.35
+  gunPrefab: {fileID: 8830339863893297673, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
 --- !u!114 &1989393690189449236
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditorInternal.ReorderableList;
+using Mirror;
 
-public class BulletHandler : MonoBehaviour
+public class BulletHandler : NetworkBehaviour
 {
     [SerializeField] Bullet prefab;
     private List<Bullet> pool;
@@ -14,18 +15,24 @@ public class BulletHandler : MonoBehaviour
     void Start()
     {
         pool = new List<Bullet>(poolSize);
-        for (int i = 0; i < poolSize; i++)
+        if (isServer)
         {
-            pool.Add(createNewObject());
+            for (int i = 0; i < poolSize; i++)
+            {
+                var newBullet = createNewObject();
+                pool.Add(newBullet);
+            }
         }
         instance = this;
     }
 
+    [Server]
     Bullet createNewObject()
     {
         Bullet gm = Instantiate(prefab);
         gm.transform.parent = transform;
         gm.gameObject.SetActive(false);
+        NetworkServer.Spawn(gm.gameObject);
         return gm;
     }
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Unity.Burst.Intrinsics;
+
 public class Player : NetworkBehaviour
 {
     public float speed = 3f;
@@ -12,8 +14,10 @@ public class Player : NetworkBehaviour
     Body body;
     Shoulder shoulder;
     BoxCollider2D coll;
+    [SyncVar]Weapon weapon;
     [SerializeField] float _maxHealth = 100;
     [SerializeField] float squatHigh = 0.35f;
+    [SerializeField] RangeWeapon gunPrefab;
 
     float _health;
 
@@ -32,6 +36,12 @@ public class Player : NetworkBehaviour
         shoulder= GetComponentInChildren<Shoulder>();
         coll= GetComponent<BoxCollider2D>();
         _health = _maxHealth;
+        if(isServer)
+            EquipWeapon();
+        else if(weapon != null)
+        {
+            EquipOnClients(weapon);
+        }
     }
     public void Move(float mov)
     {
@@ -82,6 +92,41 @@ public class Player : NetworkBehaviour
         coll.offset += Vector2.down * squatHigh;
     }
 
+    [Command]
+    public void Attack()
+    {
+        weapon.Attack();
+    }
+
+    [Server]
+    public void EquipWeapon()
+    {
+        var arm = GetComponentInChildren<Arm>();
+        Weapon mW = Instantiate(gunPrefab);
+        mW.transform.SetParent(arm.transform);
+        mW.gameObject.SetActive(true);
+        mW.transform.localPosition = new Vector3(0, -0.4f, 0);
+        NetworkServer.Spawn(mW.gameObject);
+        this.weapon = mW;
+        EquipRPC(mW);
+    }
+
+    [ClientRpc]
+    void EquipRPC(Weapon w)
+    {
+        EquipOnClients(w);
+    }
+
+    [Client]
+    void EquipOnClients(Weapon newWeapon)
+    {
+        var arm = GetComponentInChildren<Arm>();
+        this.weapon = newWeapon;
+        newWeapon.transform.SetParent(arm.transform);
+        newWeapon.gameObject.SetActive(true);
+        newWeapon.transform.localPosition = new Vector3(0, -0.4f, 0);
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -97,6 +142,14 @@ public class Player : NetworkBehaviour
             else if (Input.GetButtonUp(controlles.Squat))
             {
                 SquatUp();
+            }
+            
+            if (weapon != null && !weapon.HasColdown())
+            {                
+                if (Input.GetButtonDown(controlles.Fire))
+                {
+                    Attack();
+                }
             }
 
             //rb.AddForce(new Vector2(mov,0) * speed,ForceMode2D.Impulse);
