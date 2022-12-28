@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
+    [SerializeField] Vector2 spawnPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,10 @@ public class Spawn : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SpawnPlayer(Player player)
+    {
+        player.SetPlayerPosition(spawnPosition);
     }
 }

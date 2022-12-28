@@ -27,6 +27,11 @@ public class Player : NetworkBehaviour
         get => _health;
     }
 
+    public void SetPlayerPosition(Vector2 pos)
+    {
+        rb.position = pos;
+    }
+
     public Controlles controlles = new Controlles("Horizontal", "Jump", "Fire", "Vertical","Squat");
     // Start is called before the first frame update
     void Start()
