@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : NetworkBehaviour
 {
@@ -47,6 +48,10 @@ public class PlayerMovement : NetworkBehaviour
         else if (Input.GetButtonUp("Squat"))
         {
             crouch = false;
+        }
+    
+        if(Input.GetKey(KeyCode.M)){
+            SceneManager.LoadScene("CharacterTest_2");
         }
     }
 
