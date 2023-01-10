@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneId: 2911617814
+  sceneId: 4292474293
   _assetId: 0
   serverOnly: 1
   visible: 0
@@ -398,9 +398,9 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs:
-  - {fileID: 4657102787574329005, guid: 87d24a0ea1460a74095dff1546658455, type: 3}
   - {fileID: 5456022182399805979, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
   - {fileID: 4159751177815148308, guid: 1ec87df9c85874c4cb91c12253ce5a9b, type: 3}
+  - {fileID: 4657102787574329005, guid: 87d24a0ea1460a74095dff1546658455, type: 3}
   timeInterpolationGui: 0
 --- !u!4 &524119871
 Transform:

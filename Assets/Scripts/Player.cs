@@ -107,8 +107,8 @@ public class Player : NetworkBehaviour
         mW.gameObject.SetActive(true);
         mW.transform.localPosition = new Vector3(0, -0.4f, 0);
         NetworkServer.Spawn(mW.gameObject);
-        this.weapon = mW;
         EquipRPC(mW);
+        this.weapon = mW;
     }
 
     [ClientRpc]
@@ -125,6 +125,8 @@ public class Player : NetworkBehaviour
         newWeapon.transform.SetParent(arm.transform);
         newWeapon.gameObject.SetActive(true);
         newWeapon.transform.localPosition = new Vector3(0, -0.4f, 0);
+        newWeapon.transform.localRotation = Quaternion.identity;
+        newWeapon.transform.localScale= new Vector3(0.4f,0.235f,1);
     }
 
     // Update is called once per frame

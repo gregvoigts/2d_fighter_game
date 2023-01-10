@@ -15,25 +15,38 @@ public class BulletHandler : NetworkBehaviour
     void Start()
     {
         pool = new List<Bullet>(poolSize);
-        if (isServer)
-        {
             for (int i = 0; i < poolSize; i++)
             {
-                var newBullet = createNewObject();
-                pool.Add(newBullet);
+                createNewObject();
+                
             }
-        }
+        
         instance = this;
     }
 
-    [Server]
-    Bullet createNewObject()
+    void createNewObject()
     {
         Bullet gm = Instantiate(prefab);
-        gm.transform.parent = transform;
-        gm.gameObject.SetActive(false);
         NetworkServer.Spawn(gm.gameObject);
+        gm.SetActive(false);
+        prepareObject(gm);
+        pool.Add(gm);
+    }
+
+    public Bullet getNew(Vector3 position, Quaternion rotation)
+    {
+        Bullet gm = Instantiate(prefab, position, rotation);
+        NetworkServer.Spawn(gm.gameObject);
+        prepareObject(gm);
+        pool.Capacity++;
+        pool.Add(gm); 
+        gm.SetActive(true);
         return gm;
+    }
+
+    public void prepareObject(Bullet obj)
+    {
+        obj.transform.parent = transform;
     }
 
     void IncreasePool()
@@ -41,7 +54,7 @@ public class BulletHandler : NetworkBehaviour
         pool.Capacity *= 2;
         for (int i = nrOfActiveObjects; i < pool.Capacity; i++)
         {
-            pool.Add(createNewObject());
+            createNewObject();
         }
     }
 
@@ -52,19 +65,20 @@ public class BulletHandler : NetworkBehaviour
 
         var currentBullet = pool[nrOfActiveObjects];
         currentBullet.PoolIndex = nrOfActiveObjects;
-        currentBullet.gameObject.SetActive(true);
+        currentBullet.SetActive(true);
         currentBullet.transform.position = position;
         currentBullet.transform.rotation = rotation;
 
 
         nrOfActiveObjects += 1;
+        Debug.Log(currentBullet);
         return currentBullet;
     }
     
     public void DestroyBullet(Bullet b)
     {
-        b.gameObject.SetActive(false);
-        nrOfActiveObjects-= 1;
+        b.SetActive(false);
+        nrOfActiveObjects -= 1;
         pool[b.PoolIndex] = pool[nrOfActiveObjects];
         pool[nrOfActiveObjects] = b;
     }

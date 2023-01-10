@@ -32,12 +32,25 @@ public class Bullet : NetworkBehaviour
     [SerializeField] float speed;
     public float power = 30;
 
+    [SyncVar(hook =nameof(ChangeActive))] bool isActive;
+
     new Renderer renderer;
 
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<Renderer>();
+    }
+
+    void ChangeActive(bool old, bool ne)
+    {
+        gameObject.SetActive(ne);
+    }
+
+    public void SetActive(bool value)
+    {
+        gameObject.SetActive(value);
+        isActive= value;
     }
 
     // Update is called once per frame
@@ -49,6 +62,7 @@ public class Bullet : NetworkBehaviour
 
             if (!renderer.isVisible)
             {
+                if(isServer)
                 BulletHandler.instance.DestroyBullet(this);
             }
         }
@@ -56,7 +70,11 @@ public class Bullet : NetworkBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        BulletHandler.instance.DestroyBullet(this);
+        if (!isServer)
+        {
+            return;
+        }
+            BulletHandler.instance.DestroyBullet(this);
         Player p;
         if(collision.gameObject.TryGetComponent<Player>(out p))
         {
