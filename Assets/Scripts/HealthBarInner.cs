@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class HealthBarInner : MonoBehaviour
 {
-    private Image healthImage;
-
-    public float FillAmount { set { healthImage.fillAmount = value; } }
+    public float FillAmount { set { transform.localScale = new Vector3(value,1); } }
     // Start is called before the first frame update
     void Start()
     {
-        healthImage= GetComponent<Image>();
+       
     }
 }

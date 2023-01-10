@@ -19,13 +19,9 @@ public class Player : NetworkBehaviour
     [SerializeField] float squatHigh = 0.35f;
     [SerializeField] RangeWeapon gunPrefab;
 
-    float _health;
+    [SyncVar(hook =nameof(HealthChanged))]float _health;
 
-    public HealthBar healthBar { get; set; }
-    public float Health
-    {
-        get => _health;
-    }
+    HealthBarInner healthBar;
 
     public Controlles controlles = new Controlles("Horizontal", "Jump", "Fire", "Vertical","Squat");
     // Start is called before the first frame update
@@ -35,6 +31,7 @@ public class Player : NetworkBehaviour
         body= GetComponentInChildren<Body>();
         shoulder= GetComponentInChildren<Shoulder>();
         coll= GetComponent<BoxCollider2D>();
+        healthBar= GetComponentInChildren<HealthBarInner>();
         _health = _maxHealth;
         if(isServer)
             EquipWeapon();
@@ -42,6 +39,11 @@ public class Player : NetworkBehaviour
         {
             EquipOnClients(weapon);
         }
+    }
+
+    void HealthChanged(float oldHealth, float newHealth)
+    {
+        healthBar.FillAmount = newHealth / _maxHealth;
     }
     public void Move(float mov)
     {
@@ -165,6 +167,8 @@ public class Player : NetworkBehaviour
         }
 
     }
+
+    [Server]
     public float hit(float power)
     {
         print("hit " + power);
@@ -173,8 +177,6 @@ public class Player : NetworkBehaviour
         {
             _health = 0;
         }
-        Debug.Log(_health);
-        healthBar.onHealthChanged(Mathf.Clamp(_health / _maxHealth, 0, 1.0f));
         return _health;
     }
 }

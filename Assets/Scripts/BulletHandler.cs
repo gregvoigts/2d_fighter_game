@@ -78,6 +78,11 @@ public class BulletHandler : NetworkBehaviour
     public void DestroyBullet(Bullet b)
     {
         b.SetActive(false);
+        if(b.PoolIndex == -1)
+        {
+            NetworkServer.Destroy(b.gameObject);
+            return;
+        }
         nrOfActiveObjects -= 1;
         pool[b.PoolIndex] = pool[nrOfActiveObjects];
         pool[nrOfActiveObjects] = b;

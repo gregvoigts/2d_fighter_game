@@ -40,6 +40,7 @@ public class Bullet : NetworkBehaviour
     void Start()
     {
         renderer = GetComponent<Renderer>();
+        PoolIndex= -1;
     }
 
     void ChangeActive(bool old, bool ne)
@@ -74,7 +75,7 @@ public class Bullet : NetworkBehaviour
         {
             return;
         }
-            BulletHandler.instance.DestroyBullet(this);
+        BulletHandler.instance.DestroyBullet(this);
         Player p;
         if(collision.gameObject.TryGetComponent<Player>(out p))
         {
