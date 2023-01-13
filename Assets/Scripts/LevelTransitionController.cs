@@ -6,15 +6,11 @@ using UnityEngine.SceneManagement;
 public class LevelTransitionController : MonoBehaviour
 {
     public bool IsNextLevel = false;
-    public string SceneName = "Lobby";
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string SceneName = "Start";
 
     void OnTriggerEnter2D(Collider2D col){
-        SceneManager.LoadScene(SceneName);
+        if(col.transform.Find("Flag")?.gameObject?.activeSelf ?? false) {
+            SceneManager.LoadScene(SceneName);
+        }
     }
 }
