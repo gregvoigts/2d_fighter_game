@@ -1,3 +1,7 @@
+# Custom ignores
+[Aa]ssets/mirror
+[Aa]ssets/ScriptTemplates
+
 # Created by https://www.toptal.com/developers/gitignore/api/unity,visualstudiocode,visualstudio,csharp
 # Edit at https://www.toptal.com/developers/gitignore?templates=unity,visualstudiocode,visualstudio,csharp
 
