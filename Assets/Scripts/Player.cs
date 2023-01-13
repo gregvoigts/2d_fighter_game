@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Unity.Burst.Intrinsics;
+using System;
 
 public class Player : NetworkBehaviour
 {
     Shoulder shoulder;
-    BoxCollider2D coll;
+    //BoxCollider2D coll;
     [SyncVar]Weapon weapon;
     [SerializeField] float _maxHealth = 100;
     [SerializeField] RangeWeapon gunPrefab;
+    [SyncVar]float deathTimer;
 
     [SyncVar(hook =nameof(HealthChanged))]float _health;
 
@@ -21,20 +23,28 @@ public class Player : NetworkBehaviour
     void Start()
     {
         shoulder= GetComponentInChildren<Shoulder>();
-        coll= GetComponent<BoxCollider2D>();
+        Debug.Log(shoulder);
+        //coll= GetComponent<BoxCollider2D>();
         healthBar= GetComponentInChildren<HealthBarInner>();
-        _health = _maxHealth;
-        if(isServer)
-            EquipWeapon();
-        else if(weapon != null)
+        Debug.Log("Player Start");
+        if (isServer)
         {
+            _health = _maxHealth;
+            EquipWeapon();
+        }
+        else if (weapon != null)
+        {
+            Debug.Log("Equip on Start");
             EquipOnClients(weapon);
         }
     }
 
     void HealthChanged(float oldHealth, float newHealth)
     {
-        healthBar.FillAmount = newHealth / _maxHealth;
+        if (healthBar != null)
+        {
+            healthBar.FillAmount = newHealth / _maxHealth;
+        }
     }
 
     [Command]
@@ -47,10 +57,10 @@ public class Player : NetworkBehaviour
     public void EquipWeapon()
     {
         Weapon mW = Instantiate(gunPrefab);
+        NetworkServer.Spawn(mW.gameObject);
         mW.transform.SetParent(shoulder.transform);
         mW.gameObject.SetActive(true);
         mW.transform.localPosition = new Vector3(-0.018f, -0.419f, 0);
-        NetworkServer.Spawn(mW.gameObject);
         EquipRPC(mW);
         this.weapon = mW;
     }
@@ -58,12 +68,17 @@ public class Player : NetworkBehaviour
     [ClientRpc]
     void EquipRPC(Weapon w)
     {
+        Debug.Log(w);
         EquipOnClients(w);
     }
 
     [Client]
     void EquipOnClients(Weapon newWeapon)
     {
+        if(shoulder == null)
+        {
+            shoulder = GetComponentInChildren<Shoulder>();
+        }
         this.weapon = newWeapon;
         newWeapon.transform.SetParent(shoulder.transform);
         newWeapon.gameObject.SetActive(true);
@@ -103,7 +118,18 @@ public class Player : NetworkBehaviour
         if (_health < 0)
         {
             _health = 0;
+            //Tod
+            this.gameObject.SetActive(false);
+            changeActive(false);
+            transform.position = new Vector3(-26.45f, 0.19f, 0);
+            _health = _maxHealth;
         }
         return _health;
+    }
+
+    [ClientRpc]
+    void changeActive(bool value)
+    {
+        this.gameObject.SetActive(value);
     }
 }
