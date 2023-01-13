@@ -103,7 +103,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  speed: 0.1
+  speed: 0.5
   power: 30
 --- !u!61 &1961714174
 BoxCollider2D:

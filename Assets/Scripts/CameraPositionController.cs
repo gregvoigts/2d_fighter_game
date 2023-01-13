@@ -27,9 +27,9 @@ public class CameraPositionController : MonoBehaviour
     { 
         // TODO: find players when they are spawned
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
-        UpdateCameraPosition();
+        if(players.Any())
+            UpdateCameraPosition();
     }
-
 
     private void UpdateCameraPosition()
     {

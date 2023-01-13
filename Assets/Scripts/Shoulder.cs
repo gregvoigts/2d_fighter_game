@@ -2,24 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Unity.Mathematics;
 
 public class Shoulder : MonoBehaviour
 {
-    [SerializeField] float rotationSpeed = 1;
-    // Start is called before the first frame update
-    void Start()
+    float angle = 90;
+    public void RotateArm(float vert, float hor)
     {
-    }
-
-    public void RotateArm(float vert)
-    {
-        var zAngle = vert * rotationSpeed;
-
-        var newZ = transform.rotation.eulerAngles.z + zAngle;
-
-        if (newZ >= -60 && newZ < 90 || newZ > 300)
-        {
-            transform.Rotate(new Vector3(0f, 0f, zAngle));
-        }
+        vert = math.round(vert);
+        hor= math.round(hor);
+        hor = math.abs(hor);
+        angle = 90 + (vert * 90);
+        angle += (45 * hor * vert * -1);
+        
+        transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 }

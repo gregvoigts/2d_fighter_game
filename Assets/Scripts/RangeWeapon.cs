@@ -22,6 +22,7 @@ public class RangeWeapon :  Weapon
     [ClientRpc]
     void ClientShot(Bullet bullet)
     {
+        if(bullet == null) return;
         bullet.direction = transform.rotation * Vector3.down;
         bullet.gameObject.transform.position = transform.position + bullet.direction * transform.localScale.x;
         bullet.gameObject.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90);
