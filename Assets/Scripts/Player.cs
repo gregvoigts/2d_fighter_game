@@ -7,12 +7,13 @@ using System;
 
 public class Player : NetworkBehaviour
 {
+    [SerializeField] float deathTime = 3.0f;
     Shoulder shoulder;
     //BoxCollider2D coll;
     [SyncVar]Weapon weapon;
     [SerializeField] float _maxHealth = 100;
     [SerializeField] RangeWeapon gunPrefab;
-    [SyncVar]float deathTimer;
+    [SyncVar(hook =nameof(DeathTimerChanged))] public float deathTimer;
 
     [SyncVar(hook =nameof(HealthChanged))]float _health;
 
@@ -45,6 +46,20 @@ public class Player : NetworkBehaviour
         {
             healthBar.FillAmount = newHealth / _maxHealth;
         }
+    }
+
+    private void DeathTimerChanged(float oldValue, float newValue)
+    {
+        if (isLocalPlayer)
+        {
+            DeathScreen.instance.UpdateDeathCounter(newValue);
+        }
+    
+    }
+
+    private void Respawn()
+    {
+        
     }
 
     [Command]
@@ -90,7 +105,7 @@ public class Player : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (isLocalPlayer)
+        if (isLocalPlayer && deathTimer <= 0)
         {
             var vert = Input.GetAxis(controlles.MoveArm);
             var hor = Input.GetAxis(controlles.Move);
@@ -107,29 +122,38 @@ public class Player : NetworkBehaviour
 
             shoulder.RotateArm(vert, hor);
         }
-
+        if(isServer)
+        {
+            //Debug.Log(deathTimer);
+            if(deathTimer > 0)
+            {
+                deathTimer -= Time.deltaTime;
+                if(deathTimer < 0)
+                {
+                    deathTimer = 0;
+                    Respawn();
+                }
+            }
+        }
     }
 
     [Server]
     public float hit(float power)
     {
+        if(deathTimer > 0)
+        {
+            return 0;
+        }
         print("hit " + power);
         _health -= power;
         if (_health < 0)
         {
             _health = 0;
-            //Tod
-            this.gameObject.SetActive(false);
-            changeActive(false);
+            //Tod            
             transform.position = new Vector3(-26.45f, 0.19f, 0);
             _health = _maxHealth;
+            deathTimer = deathTime;
         }
         return _health;
-    }
-
-    [ClientRpc]
-    void changeActive(bool value)
-    {
-        this.gameObject.SetActive(value);
     }
 }

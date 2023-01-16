@@ -14,12 +14,21 @@ public class PlayerMovement : NetworkBehaviour
     float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
+    Player player;
 
+    private void Start()
+    {
+        player = GetComponent<Player>();
+    }
     // Update is called once per frame
     void Update()
     {
         if(isLocalPlayer)
         {
+            if(player.deathTimer> 0)
+            {
+                return;
+            }
             handleInput();
         }
     }

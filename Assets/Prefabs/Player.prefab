@@ -642,17 +642,17 @@ MonoBehaviour:
   syncInterval: 0
   target: {fileID: 209087000546993399}
   clientAuthority: 0
-  onlySyncOnChange: 1
-  bufferResetMultiplier: 5
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
   syncPosition: 1
   syncRotation: 1
   syncScale: 1
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!95 &1009013108
 Animator:
   serializedVersion: 4
@@ -697,9 +697,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42009223e88c6db4aa53398e020d022c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 1
+  syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
+  deathTime: 3
   _maxHealth: 100
   gunPrefab: {fileID: 8830339863893297673, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
 --- !u!114 &2495677179711148845
@@ -719,17 +720,17 @@ MonoBehaviour:
   syncInterval: 0
   target: {fileID: 2464686431783217811}
   clientAuthority: 0
-  onlySyncOnChange: 1
-  bufferResetMultiplier: 5
-  positionSensitivity: 0.01
-  rotationSensitivity: 0.01
-  scaleSensitivity: 0.01
   syncPosition: 0
   syncRotation: 1
   syncScale: 0
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  onlySyncOnChange: 1
+  bufferResetMultiplier: 5
+  positionSensitivity: 0.01
+  rotationSensitivity: 0.01
+  scaleSensitivity: 0.01
 --- !u!1 &9072338547805338468
 GameObject:
   m_ObjectHideFlags: 0
