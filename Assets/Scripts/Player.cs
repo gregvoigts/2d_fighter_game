@@ -4,6 +4,7 @@ using UnityEngine;
 using Mirror;
 using Unity.Burst.Intrinsics;
 using System;
+using Unity.Mathematics;
 
 public class Player : NetworkBehaviour
 {
@@ -17,13 +18,29 @@ public class Player : NetworkBehaviour
 
     [SyncVar(hook =nameof(HealthChanged))]float _health;
 
+    [SerializeField][SyncVar] int team;
+    [SerializeField]Shader playerShader;
+
+    Color team1 = new Color(1.0f, 0.2039216f, 0.007843138f, 0.6156863f);
+    Color team2 = new Color(0.007843138f, 0.7254902f, 1, 0.3529412f);
+
+
+    Vector3 spawnTeam2 = new Vector3(-26.45f, 0.19f, 0);
+    Vector3 spawnTeam1 = new Vector3(10.0f, -0.37f, 0);
+
+    float sinFaktor;
+    const float sinAdd = -math.PI / 2;
+
+    SpriteRenderer spriteRenderer;
     HealthBarInner healthBar;
 
     public Controlles controlles = new Controlles("Horizontal", "Jump", "Fire", "Vertical","Squat");
     // Start is called before the first frame update
     void Start()
     {
-        shoulder= GetComponentInChildren<Shoulder>();
+        sinFaktor = 2 * math.PI / deathTime;
+        shoulder = GetComponentInChildren<Shoulder>();
+        spriteRenderer=GetComponent<SpriteRenderer>();
         Debug.Log(shoulder);
         //coll= GetComponent<BoxCollider2D>();
         healthBar= GetComponentInChildren<HealthBarInner>();
@@ -31,6 +48,7 @@ public class Player : NetworkBehaviour
         if (isServer)
         {
             _health = _maxHealth;
+            team = NetworkServer.connections.Count % 2;
             EquipWeapon();
         }
         else if (weapon != null)
@@ -38,6 +56,13 @@ public class Player : NetworkBehaviour
             Debug.Log("Equip on Start");
             EquipOnClients(weapon);
         }
+        var mat = new Material(playerShader);
+        mat.SetColor("_TintColor", team == 0 ? team1 : team2);
+        mat.SetFloat("_Progress", -1);
+        mat.SetColor("LaserColor", new Color(14, 0, 191, 0));
+        mat.SetFloat("LaserThickness", 0.03f);
+        spriteRenderer.material = mat;
+        Debug.Log(spriteRenderer.material.GetColor("_TintColor"));
     }
 
     void HealthChanged(float oldHealth, float newHealth)
@@ -54,7 +79,19 @@ public class Player : NetworkBehaviour
         {
             DeathScreen.instance.UpdateDeathCounter(newValue);
         }
-    
+        if(newValue < deathTime /2 && oldValue > deathTime / 2)
+        {
+            transform.position = team == 0 ? spawnTeam1 : spawnTeam2;
+        }
+        float prog;
+        if (newValue == 0 || newValue == deathTime)
+        {
+            prog = -1;
+        }
+        else {
+            prog = math.sin(newValue * sinFaktor + sinAdd);
+        }
+        spriteRenderer.material.SetFloat("_Progress", prog);
     }
 
     private void Respawn()
@@ -116,6 +153,7 @@ public class Player : NetworkBehaviour
             {                
                 if (Input.GetButtonDown(controlles.Fire))
                 {
+                    Debug.Log(spriteRenderer.material.GetColor("_TintColor"));
                     Attack();
                 }
             }
@@ -149,11 +187,17 @@ public class Player : NetworkBehaviour
         if (_health < 0)
         {
             _health = 0;
-            //Tod            
-            transform.position = new Vector3(-26.45f, 0.19f, 0);
+            //Tod
+            //killed();
             _health = _maxHealth;
             deathTimer = deathTime;
         }
         return _health;
     }
+
+    /*[ClientRpc]
+    public void killed() {
+        transform.position = team == 0 ? spawnTeam1 : spawnTeam2;
+
+    }*/
 }

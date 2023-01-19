@@ -27,13 +27,12 @@ public class BulletHandler : NetworkBehaviour
     void createNewObject()
     {
         Bullet gm = Instantiate(prefab);
-        NetworkServer.Spawn(gm.gameObject);
         gm.SetActive(false);
         prepareObject(gm);
         pool.Add(gm);
     }
 
-    public Bullet getNew(Vector3 position, Quaternion rotation)
+    /*public Bullet getNew(Vector3 position, Quaternion rotation)
     {
         Bullet gm = Instantiate(prefab, position, rotation);
         NetworkServer.Spawn(gm.gameObject);
@@ -42,7 +41,7 @@ public class BulletHandler : NetworkBehaviour
         pool.Add(gm); 
         gm.SetActive(true);
         return gm;
-    }
+    }*/
 
     public void prepareObject(Bullet obj)
     {
@@ -60,10 +59,17 @@ public class BulletHandler : NetworkBehaviour
 
     public Bullet RetrieveInstance(Vector3 position, Quaternion rotation)
     {
+
         if (nrOfActiveObjects >= pool.Capacity)
             IncreasePool();
 
         var currentBullet = pool[nrOfActiveObjects];
+        if (!currentBullet.spawned)
+        {
+            NetworkServer.Spawn(currentBullet.gameObject);
+            currentBullet.spawned = true;
+        }
+        currentBullet.hitted= false;
         currentBullet.PoolIndex = nrOfActiveObjects;
         currentBullet.SetActive(true);
         currentBullet.transform.position = position;
@@ -71,18 +77,12 @@ public class BulletHandler : NetworkBehaviour
 
 
         nrOfActiveObjects += 1;
-        Debug.Log(currentBullet);
         return currentBullet;
     }
     
     public void DestroyBullet(Bullet b)
     {
         b.SetActive(false);
-        if(b.PoolIndex == -1)
-        {
-            NetworkServer.Destroy(b.gameObject);
-            return;
-        }
         nrOfActiveObjects -= 1;
         pool[b.PoolIndex] = pool[nrOfActiveObjects];
         pool[nrOfActiveObjects] = b;

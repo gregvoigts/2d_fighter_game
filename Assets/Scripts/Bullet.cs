@@ -31,6 +31,8 @@ public class Bullet : NetworkBehaviour
 
     [SerializeField] float speed;
     public float power = 30;
+    [SyncVar]public bool hitted = false;
+    public bool spawned = false;
 
     [SyncVar(hook =nameof(ChangeActive))] bool isActive;
 
@@ -40,7 +42,6 @@ public class Bullet : NetworkBehaviour
     void Start()
     {
         renderer = GetComponent<Renderer>();
-        PoolIndex= -1;
     }
 
     void ChangeActive(bool old, bool ne)
@@ -71,10 +72,11 @@ public class Bullet : NetworkBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!isServer)
+        if (!isServer || hitted)
         {
             return;
         }
+        hitted= true;
         BulletHandler.instance.DestroyBullet(this);
         Player p;
         if(collision.gameObject.TryGetComponent<Player>(out p))

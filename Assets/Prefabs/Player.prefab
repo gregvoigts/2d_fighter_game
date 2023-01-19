@@ -437,10 +437,10 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 4294967295
+  m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 03b435901721f8444b7dce5761de2372, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -703,6 +703,9 @@ MonoBehaviour:
   deathTime: 3
   _maxHealth: 100
   gunPrefab: {fileID: 8830339863893297673, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
+  deathTimer: 0
+  team: 0
+  playerShader: {fileID: -6465566751694194690, guid: 2047b821cb936814397afb0dc5e856d7, type: 3}
 --- !u!114 &2495677179711148845
 MonoBehaviour:
   m_ObjectHideFlags: 0
