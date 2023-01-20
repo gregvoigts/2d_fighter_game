@@ -706,6 +706,7 @@ MonoBehaviour:
   deathTimer: 0
   team: 0
   playerShader: {fileID: -6465566751694194690, guid: 2047b821cb936814397afb0dc5e856d7, type: 3}
+  hasFlag: 0
 --- !u!114 &2495677179711148845
 MonoBehaviour:
   m_ObjectHideFlags: 0
