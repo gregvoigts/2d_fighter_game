@@ -21,6 +21,9 @@ public class Player : NetworkBehaviour
     [SerializeField][SyncVar] int team;
     [SerializeField]Shader playerShader;
 
+    [SyncVar(hook = nameof(FlagChanged))] public bool hasFlag;
+    GameObject flag;
+
     Color team1 = new Color(1.0f, 0.2039216f, 0.007843138f, 0.6156863f);
     Color team2 = new Color(0.007843138f, 0.7254902f, 1, 0.3529412f);
 
@@ -41,6 +44,7 @@ public class Player : NetworkBehaviour
         sinFaktor = 2 * math.PI / deathTime;
         shoulder = GetComponentInChildren<Shoulder>();
         spriteRenderer=GetComponent<SpriteRenderer>();
+        flag = transform.Find("Flag")?.gameObject;
         Debug.Log(shoulder);
         //coll= GetComponent<BoxCollider2D>();
         healthBar= GetComponentInChildren<HealthBarInner>();
@@ -71,6 +75,12 @@ public class Player : NetworkBehaviour
         {
             healthBar.FillAmount = newHealth / _maxHealth;
         }
+    }
+
+    private void FlagChanged(bool oldValue, bool newValue)
+    {
+            flag.SetActive(newValue);
+        Debug.Log($"Flag changed to:{newValue}");
     }
 
     private void DeathTimerChanged(float oldValue, float newValue)
@@ -191,6 +201,14 @@ public class Player : NetworkBehaviour
             //killed();
             _health = _maxHealth;
             deathTimer = deathTime;
+            //Drop Flag
+            Debug.Log(hasFlag);
+            if (hasFlag)
+            {
+                hasFlag = false;
+                FlagController.instance.transform.position = transform.position;
+                FlagController.instance.SetActive(true);
+            }
         }
         return _health;
     }
