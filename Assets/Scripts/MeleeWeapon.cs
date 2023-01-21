@@ -9,4 +9,9 @@ public class MeleeWeapon : Weapon
     {
         transform.Rotate(new Vector3(0, 0, 90));
     }
+
+    public override void attackAnimation()
+    {
+        throw new System.NotImplementedException();
+    }
 }

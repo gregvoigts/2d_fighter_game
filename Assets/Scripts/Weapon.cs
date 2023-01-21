@@ -8,8 +8,11 @@ public abstract class Weapon : NetworkBehaviour
     [SerializeField] protected float coldown = 1.0f;
     [SyncVar] protected float _coldown = 0;
     [SerializeField] protected float damage = 15.0f;
+    public Animator animator;
 
     abstract public void Attack();
+
+    abstract public void attackAnimation();
 
     // Update is called once per frame
     private void Update()

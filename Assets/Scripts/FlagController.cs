@@ -11,16 +11,18 @@ public class FlagController : NetworkBehaviour
 
     private void Awake()
     {
-        if(instance != null && instance != this)
+        Debug.Log("Flag awaked");
+        instance= this;
+        if (NetworkServer.active)
         {
-            Destroy(this);
-        }
-        else
-        {
-            instance= this;
+            NetworkServer.Spawn(this.gameObject);
         }
     }
 
+    private void Start()
+    {
+        Debug.Log(this.isActiveAndEnabled);
+    }
 
     void OnTriggerEnter2D(Collider2D col){
         if(!isServer)

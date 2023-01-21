@@ -5,20 +5,24 @@ using Mirror;
 using Unity.Burst.Intrinsics;
 using System;
 using Unity.Mathematics;
+using UnityEngine.SceneManagement;
 
 public class Player : NetworkBehaviour
 {
     [SerializeField] float deathTime = 3.0f;
     Shoulder shoulder;
     //BoxCollider2D coll;
-    [SyncVar]Weapon weapon;
+    [SyncVar]public Weapon weapon;
     [SerializeField] float _maxHealth = 100;
     [SerializeField] RangeWeapon gunPrefab;
     [SyncVar(hook =nameof(DeathTimerChanged))] public float deathTimer;
 
     [SyncVar(hook =nameof(HealthChanged))]float _health;
 
-    [SerializeField][SyncVar] int team;
+    /// <summary>
+    /// Value between 1 and 2 
+    /// </summary>
+    [SyncVar]public int team;
     [SerializeField]Shader playerShader;
 
     [SyncVar(hook = nameof(FlagChanged))] public bool hasFlag;
@@ -27,15 +31,12 @@ public class Player : NetworkBehaviour
     Color team1 = new Color(1.0f, 0.2039216f, 0.007843138f, 0.6156863f);
     Color team2 = new Color(0.007843138f, 0.7254902f, 1, 0.3529412f);
 
-
-    Vector3 spawnTeam2 = new Vector3(-26.45f, 0.19f, 0);
-    Vector3 spawnTeam1 = new Vector3(10.0f, -0.37f, 0);
-
     float sinFaktor;
     const float sinAdd = -math.PI / 2;
 
     SpriteRenderer spriteRenderer;
     HealthBarInner healthBar;
+    Animator animator;
 
     public Controlles controlles = new Controlles("Horizontal", "Jump", "Fire", "Vertical","Squat");
     // Start is called before the first frame update
@@ -44,29 +45,28 @@ public class Player : NetworkBehaviour
         sinFaktor = 2 * math.PI / deathTime;
         shoulder = GetComponentInChildren<Shoulder>();
         spriteRenderer=GetComponent<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
         flag = transform.Find("Flag")?.gameObject;
-        Debug.Log(shoulder);
         //coll= GetComponent<BoxCollider2D>();
         healthBar= GetComponentInChildren<HealthBarInner>();
-        Debug.Log("Player Start");
         if (isServer)
         {
             _health = _maxHealth;
-            team = NetworkServer.connections.Count % 2;
+            team = NetworkServer.connections.Count % 2 + 1;
             EquipWeapon();
         }
         else if (weapon != null)
         {
-            Debug.Log("Equip on Start");
             EquipOnClients(weapon);
         }
         var mat = new Material(playerShader);
-        mat.SetColor("_TintColor", team == 0 ? team1 : team2);
+        mat.SetColor("_TintColor", team == 1 ? team1 : team2);
         mat.SetFloat("_Progress", -1);
         mat.SetColor("LaserColor", new Color(14, 0, 191, 0));
         mat.SetFloat("LaserThickness", 0.03f);
         spriteRenderer.material = mat;
-        Debug.Log(spriteRenderer.material.GetColor("_TintColor"));
+
+        SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
     void HealthChanged(float oldHealth, float newHealth)
@@ -83,7 +83,15 @@ public class Player : NetworkBehaviour
         Debug.Log($"Flag changed to:{newValue}");
     }
 
-    private void DeathTimerChanged(float oldValue, float newValue)
+    private void OnSceneChanged(Scene current, Scene next)
+    {
+        Debug.Log("scene Changed");
+        hasFlag= false;
+        transform.position = SpawnPoints.instance.getSpawn(team);
+    }
+
+
+        private void DeathTimerChanged(float oldValue, float newValue)
     {
         if (isLocalPlayer)
         {
@@ -91,7 +99,7 @@ public class Player : NetworkBehaviour
         }
         if(newValue < deathTime /2 && oldValue > deathTime / 2)
         {
-            transform.position = team == 0 ? spawnTeam1 : spawnTeam2;
+            transform.position = SpawnPoints.instance.getSpawn(team);
         }
         float prog;
         if (newValue == 0 || newValue == deathTime)
@@ -122,7 +130,7 @@ public class Player : NetworkBehaviour
         NetworkServer.Spawn(mW.gameObject);
         mW.transform.SetParent(shoulder.transform);
         mW.gameObject.SetActive(true);
-        mW.transform.localPosition = new Vector3(-0.018f, -0.419f, 0);
+        mW.transform.localPosition = new Vector3(-0.12f, -0.038f, 0);
         EquipRPC(mW);
         this.weapon = mW;
     }
@@ -144,9 +152,9 @@ public class Player : NetworkBehaviour
         this.weapon = newWeapon;
         newWeapon.transform.SetParent(shoulder.transform);
         newWeapon.gameObject.SetActive(true);
-        newWeapon.transform.localPosition = new Vector3(-0.018f, -0.419f, 0);
-        newWeapon.transform.localRotation = Quaternion.identity;
-        newWeapon.transform.localScale= new Vector3(0.144f, 0.342f, 1);
+        newWeapon.transform.localPosition = new Vector3(-0.12f, -0.038f, 0);
+        newWeapon.transform.localRotation = Quaternion.Euler(0, 0, -90);
+        newWeapon.transform.localScale= new Vector3(4.88f, 4.88f, 1);
     }
 
     // Update is called once per frame
@@ -163,7 +171,7 @@ public class Player : NetworkBehaviour
             {                
                 if (Input.GetButtonDown(controlles.Fire))
                 {
-                    Debug.Log(spriteRenderer.material.GetColor("_TintColor"));
+                    weapon.attackAnimation();
                     Attack();
                 }
             }
