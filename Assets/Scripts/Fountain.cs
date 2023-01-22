@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Fountain : MonoBehaviour
 {
-    private bool active = false;
+    private bool active;
     private GameObject[] fountains;
     
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Controller());
         fountains = GameObject.FindGameObjectsWithTag("Fountain");
+        Disable();
+        StartCoroutine(Controller());
     }
 
     // Update is called once per frame
@@ -28,8 +29,11 @@ public class Fountain : MonoBehaviour
         {
             if (active)
             {
-                // kill player
-                Debug.Log("KILL");
+                Player player;
+                if (collision.gameObject.TryGetComponent<Player>(out player))
+                {
+                    player.hit(9999);
+                }
             }
         }
     }
@@ -40,7 +44,7 @@ public class Fountain : MonoBehaviour
         {
             if (obj != null)
             {
-                obj.SetActive(false);
+                obj.SetActive(true);
             }
         }
         active = true;
@@ -53,7 +57,7 @@ public class Fountain : MonoBehaviour
         {
             if (obj != null)
             {
-                obj.SetActive(true);
+                obj.SetActive(false);
             }
         }
     }
