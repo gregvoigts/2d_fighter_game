@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Fountain
   - DoorClosed
-  - DoorOpenR
-  - DoorOpenL
   - DoorOpen
   layers:
   - Default
