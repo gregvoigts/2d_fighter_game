@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 417, y: -3613.9998}
+  m_AnchoredPosition: {x: 417, y: -2494}
   m_SizeDelta: {x: 150.085, y: 122.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85934996
@@ -394,7 +394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -427, y: -3614}
+  m_AnchoredPosition: {x: -427, y: -2494.0002}
   m_SizeDelta: {x: 150.085, y: 122.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &872116466
@@ -647,19 +647,7 @@ MonoBehaviour:
     risus ultricies tristique nulla aliquet enim tortor at auctor. Rutrum tellus
     pellentesque eu tincidunt tortor aliquam. Scelerisque viverra mauris in aliquam
     sem. Odio ut enim blandit volutpat maecenas. Arcu non sodales neque sodales.
-    Quis blandit turpis cursus in hac.\r\n\r\nIn hac habitasse platea dictumst vestibulum
-    rhoncus est. Amet dictum sit amet justo donec enim diam vulputate. Sit amet est
-    placerat in. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras
-    tincidunt lobortis. In dictum non consectetur a erat nam at. Aliquam eleifend
-    mi in nulla posuere sollicitudin aliquam. Eget velit aliquet sagittis id consectetur
-    purus ut faucibus pulvinar. Velit egestas dui id ornare arcu odio ut sem. Morbi
-    tristique senectus et netus. In eu mi bibendum neque. Enim praesent elementum
-    facilisis leo vel fringilla est. Consequat interdum varius sit amet mattis vulputate
-    enim. Malesuada bibendum arcu vitae elementum curabitur vitae. Velit egestas
-    dui id ornare arcu odio ut sem nulla. Ac turpis egestas sed tempus urna et pharetra
-    pharetra massa. Volutpat sed cras ornare arcu. Duis at consectetur lorem donec
-    massa sapien faucibus et. Duis at consectetur lorem donec massa sapien. Felis
-    eget velit aliquet sagittis id consectetur purus."
+    Quis blandit turpis cursus in hac.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 950b05f7a1489df469993511a92986cc, type: 2}
   m_sharedMaterial: {fileID: -6880154803731152927, guid: 950b05f7a1489df469993511a92986cc, type: 2}
@@ -698,7 +686,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -889,7 +877,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -114.56003}
+  m_AnchoredPosition: {x: 0, y: -366}
   m_SizeDelta: {x: 714.166, y: 62.758}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1361453531
@@ -1025,8 +1013,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 254.56}
-  m_SizeDelta: {x: 0, y: -509.12}
+  m_AnchoredPosition: {x: 0, y: 505.526}
+  m_SizeDelta: {x: 0, y: -7.189}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2034723967
 MonoBehaviour:
