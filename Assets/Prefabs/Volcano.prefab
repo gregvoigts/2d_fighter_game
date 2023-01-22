@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6384870750901367010}
   m_Layer: 0
   m_Name: volcano_fountain
-  m_TagString: Untagged
+  m_TagString: Fountain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 5723870409286840885}
   - component: {fileID: 1204468277482224702}
   - component: {fileID: 8897293297129567389}
+  - component: {fileID: 7836966220316607822}
   m_Layer: 0
   m_Name: Fountain
   m_TagString: Untagged
@@ -279,6 +280,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7836966220316607822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344351512058663815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b4565c04adc734f926c617a2937f9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6344838602108628015
 GameObject:
   m_ObjectHideFlags: 0
