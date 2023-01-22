@@ -1,3 +1,4 @@
+using Mirror;
 using UnityEngine;
 
 public class RoomCanvasUI : MonoBehaviour
@@ -11,9 +12,12 @@ public class RoomCanvasUI : MonoBehaviour
     // static instance that can be referenced from static methods below.
     static RoomCanvasUI instance;
 
+    NetworkManager manager;
+
     void Awake()
     {
         instance = this;
+        manager = GameObject.Find("RoomManager").GetComponent<NetworkManager>();
     }
 
     public static void SetActive(bool active)
@@ -22,4 +26,18 @@ public class RoomCanvasUI : MonoBehaviour
     }
 
     public static RectTransform GetPlayersPanel() => instance.playersPanel;
+
+    public void BackToLobby()
+    {
+        // stop host if host mode
+        if (NetworkServer.active && NetworkClient.isConnected)
+        {
+            manager.StopHost();
+        }
+        // stop client if client-only
+        else if (NetworkClient.isConnected)
+        {
+            manager.StopClient();
+        }
+    }
 }

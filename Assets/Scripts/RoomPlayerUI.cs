@@ -25,10 +25,11 @@ public class RoomPlayerUI : MonoBehaviour
     bool isLocalPlayer = false;
 
     NetworkRoomPlayer player;
+    NetworkManager manager;
 
     private void Start()
     {
-        //initReadyButton();
+
     }
     public void initReadyButton()
     {
@@ -63,20 +64,6 @@ public class RoomPlayerUI : MonoBehaviour
     {
         playerNameText.text = string.Format("Player {0:00}", newPlayerNumber);
     }    
-
-    //// Random color set by Player::OnStartServer
-    //public void OnPlayerColorChanged(Color32 newPlayerColor)
-    //{
-    //    playerNameText.color = newPlayerColor;
-    //}
-
-    //// This updates from Player::UpdateData via InvokeRepeating on server
-    //public void OnPlayerDataChanged(ushort newPlayerData)
-    //{
-    //    // Show the data in the UI
-    //    playerDataText.text = string.Format("Data: {0:000}", newPlayerData);
-    //}
-
     public void OnReadyStateChanged(bool newState)
     {
         readyImage.sprite = newState ? onReadyImage : onNotReadyImage;
