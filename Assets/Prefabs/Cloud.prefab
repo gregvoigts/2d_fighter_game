@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 212511154}
   - component: {fileID: 2653889204634232285}
   - component: {fileID: 1444647080222556424}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3728007012151289399}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3728007012155822234}
   - component: {fileID: 3728007012155822245}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6909699749316984556}
   - component: {fileID: 8260997659793714355}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: floe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4650442599261503409}
   - component: {fileID: 4594668857886091758}
   - component: {fileID: 277602886278870887}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 704824664346680067}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 782228486}
   - component: {fileID: 7311023665265849704}
   - component: {fileID: 6661057858652499139}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4188949329341278107}
   - component: {fileID: 4188949329341278108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rainbows_cut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4188949330729707474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rainbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

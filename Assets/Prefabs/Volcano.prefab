@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3268040398484625652}
   - component: {fileID: 6384870750901367010}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: volcano_fountain
   m_TagString: Fountain
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 444144301483792287}
   - component: {fileID: 146063988202348875}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: volcano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 1204468277482224702}
   - component: {fileID: 8897293297129567389}
   - component: {fileID: 7836966220316607822}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fountain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 163274111543240729}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Volcano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 7383760735297321992}
   - component: {fileID: 1176282696867350450}
   - component: {fileID: 5436033261235560937}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
