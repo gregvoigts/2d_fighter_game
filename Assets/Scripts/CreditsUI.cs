@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CreditsUI : MonoBehaviour
 {
-    public float speed = 9f;
+    public float speed = 10f;
 
     // Start is called before the first frame update
     void Start()

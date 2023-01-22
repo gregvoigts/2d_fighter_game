@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 417, y: -2494}
+  m_AnchoredPosition: {x: 417, y: -2791.9998}
   m_SizeDelta: {x: 150.085, y: 122.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &85934996
@@ -394,7 +394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -427, y: -2494.0002}
+  m_AnchoredPosition: {x: -427, y: -2792}
   m_SizeDelta: {x: 150.085, y: 122.11}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &872116466
@@ -633,7 +633,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "made by:\n\n\nGregor Voigts\n\nJens K\xF6necke\n\nNico Heins\n\n\n\n\n\n\n\n\nLorem
+  m_text: "Made by:\n\n\nGregor Voigts\n\nJens K\xF6necke\n\nNico Heins\n\n\n\nAssets
+    used:\n\n-- Character/environment -- \nSunny Land by Ansimuz\n\n-- Weapon --\nWeapon
+    Pack - FREE by VladPenn\n\n-- User interface --\n2D Simple UI Pack by OArielG\n\n\n\nLorem
     ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
     ut labore et dolore magna aliqua. Posuere lorem ipsum dolor sit amet consectetur.
     Eget est lorem ipsum dolor sit. Neque volutpat ac tincidunt vitae. Lacinia at

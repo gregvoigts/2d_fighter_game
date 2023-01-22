@@ -8,12 +8,12 @@ using UnityEngine.SceneManagement;
 public class HUD : MonoBehaviour
 {
     [SerializeField] TMP_Text addressField;
-    [SerializeField] NetworkManager manager;
+    NetworkManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        manager = GameObject.Find("RoomManager").GetComponent<NetworkManager>();
     }
 
     public void Exit()
