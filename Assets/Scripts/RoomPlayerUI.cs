@@ -25,7 +25,6 @@ public class RoomPlayerUI : MonoBehaviour
     bool isLocalPlayer = false;
 
     NetworkRoomPlayer player;
-    NetworkManager manager;
 
     private void Start()
     {

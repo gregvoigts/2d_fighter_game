@@ -79,7 +79,7 @@ public class Player : NetworkBehaviour
 
     private void FlagChanged(bool oldValue, bool newValue)
     {
-            flag.SetActive(newValue);
+        flag.SetActive(newValue);
         Debug.Log($"Flag changed to:{newValue}");
     }
 

@@ -11,7 +11,7 @@ public class SpawnPoints : MonoBehaviour
 
     private void Awake()
     {
-            instance = this;
+        instance = this;
     }
 
     public Vector3 getSpawn(int team)

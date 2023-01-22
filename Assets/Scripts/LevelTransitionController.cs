@@ -6,12 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class LevelTransitionController : NetworkBehaviour
 {
-    public bool IsNextLevel = false;
     public string SceneName = "Start";
     [SerializeField] int goalForTeam;
 
     void OnTriggerEnter2D(Collider2D col){
-        if(!isServer) return;
+        if (!isServer) return;
         Player player;
         if(col.TryGetComponent<Player>(out player)) {
             if (player.hasFlag && player.team == goalForTeam)
