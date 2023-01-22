@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : NetworkBehaviour
 {
+    public static List<Player> _players = new List<Player>();
     [SerializeField] float deathTime = 3.0f;
     Shoulder shoulder;
     //BoxCollider2D coll;
@@ -39,9 +40,12 @@ public class Player : NetworkBehaviour
     Animator animator;
 
     public Controlles controlles = new Controlles("Horizontal", "Jump", "Fire", "Vertical","Squat");
+
+    Vector3 _spawnPoint;
     // Start is called before the first frame update
     void Start()
     {
+        _players.Add(this);
         sinFaktor = 2 * math.PI / deathTime;
         shoulder = GetComponentInChildren<Shoulder>();
         spriteRenderer=GetComponent<SpriteRenderer>();
@@ -52,7 +56,8 @@ public class Player : NetworkBehaviour
         if (isServer)
         {
             _health = _maxHealth;
-            team = NetworkServer.connections.Count % 2 + 1;
+            team = _players.IndexOf(this) % 2 + 1;
+            
             EquipWeapon();
         }
         else if (weapon != null)
@@ -66,7 +71,7 @@ public class Player : NetworkBehaviour
         mat.SetFloat("LaserThickness", 0.03f);
         spriteRenderer.material = mat;
 
-        SceneManager.activeSceneChanged += OnSceneChanged;
+        transform.position = SpawnPoints.instance.getSpawn(team);
     }
 
     void HealthChanged(float oldHealth, float newHealth)
@@ -79,19 +84,12 @@ public class Player : NetworkBehaviour
 
     private void FlagChanged(bool oldValue, bool newValue)
     {
-            flag.SetActive(newValue);
+        flag.SetActive(newValue);
         Debug.Log($"Flag changed to:{newValue}");
     }
 
-    private void OnSceneChanged(Scene current, Scene next)
-    {
-        Debug.Log("scene Changed");
-        hasFlag= false;
-        transform.position = SpawnPoints.instance.getSpawn(team);
-    }
 
-
-        private void DeathTimerChanged(float oldValue, float newValue)
+    private void DeathTimerChanged(float oldValue, float newValue)
     {
         if (isLocalPlayer)
         {
@@ -115,6 +113,13 @@ public class Player : NetworkBehaviour
     private void Respawn()
     {
         
+    }
+
+    [Client]
+    public void changeLocation(Vector3 spawnPoint)
+    {
+        Debug.Log($"change pos to: {spawnPoint}");
+        transform.position = spawnPoint;
     }
 
     [Command]
@@ -214,8 +219,16 @@ public class Player : NetworkBehaviour
             if (hasFlag)
             {
                 hasFlag = false;
-                FlagController.instance.transform.position = transform.position;
-                FlagController.instance.SetActive(true);
+                if (power == 9999)
+                {
+                    FlagController.instance.transform.position = SpawnPoints.instance.flagSpawn.position;
+                    FlagController.instance.SetActive(true);
+                }
+                else
+                {
+                    FlagController.instance.transform.position = transform.position;
+                    FlagController.instance.SetActive(true);
+                }
             }
         }
         return _health;

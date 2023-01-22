@@ -22,6 +22,7 @@ public class RoomCanvasUI : MonoBehaviour
 
     public static void SetActive(bool active)
     {
+        if (instance?.mainPanel?.gameObject == null) return;
         instance.mainPanel.gameObject.SetActive(active);
     }
 

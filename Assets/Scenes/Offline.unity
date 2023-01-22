@@ -167,16 +167,16 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 7598339820326515750, guid: eaf2081465c91494b9d1436aee9bf929, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 5456022182399805979, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
   - {fileID: 4657102787574329005, guid: 87d24a0ea1460a74095dff1546658455, type: 3}
   timeInterpolationGui: 0
-  showRoomGUI: 1
+  showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: -5236573820521302711, guid: b6ce436c0d93d1941949e9177df45e4c, type: 3}
   RoomScene: Assets/Scenes/Room.unity
-  GameplayScene: Assets/Scenes/Start.unity
+  GameplayScene: Assets/Scenes/Game.unity
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187628724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
   m_Name: 
@@ -353,7 +353,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addressField: {fileID: 1009018098}
-  manager: {fileID: 187628725}
 --- !u!1 &464769727
 GameObject:
   m_ObjectHideFlags: 0
