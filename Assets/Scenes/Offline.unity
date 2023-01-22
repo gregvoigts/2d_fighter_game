@@ -169,9 +169,11 @@ MonoBehaviour:
   playerPrefab: {fileID: 7598339820326515750, guid: eaf2081465c91494b9d1436aee9bf929, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 5456022182399805979, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
+  - {fileID: 4657102787574329005, guid: 87d24a0ea1460a74095dff1546658455, type: 3}
   timeInterpolationGui: 0
-  showRoomGUI: 1
+  showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: -5236573820521302711, guid: b6ce436c0d93d1941949e9177df45e4c, type: 3}
   RoomScene: Assets/Scenes/Room.unity
@@ -201,7 +203,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187628724}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
   m_Name: 
@@ -250,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addressField: {fileID: 1009018098}
+  manager: {fileID: 187628725}
 --- !u!1 &332531481
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +610,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822265241}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -892,7 +895,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u200B"
+  m_text: "localhost\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 950b05f7a1489df469993511a92986cc, type: 2}
   m_sharedMaterial: {fileID: -6880154803731152927, guid: 950b05f7a1489df469993511a92986cc, type: 2}
@@ -1823,7 +1826,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 187628729}
         m_TargetAssemblyTypeName: HUD, Assembly-CSharp
-        m_MethodName: Host
+        m_MethodName: Connect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1972,7 +1975,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 187628729}
+        m_TargetAssemblyTypeName: HUD, Assembly-CSharp
+        m_MethodName: valueChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: test
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -1997,7 +2012,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 
+  m_Text: localhost
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0

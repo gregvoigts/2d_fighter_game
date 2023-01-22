@@ -3138,7 +3138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1694327057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3216,10 +3216,12 @@ MonoBehaviour:
   Interval: 10
   Timeout: 10000
   FastResend: 2
+  CongestionWindow: 0
   SendWindowSize: 4096
   ReceiveWindowSize: 4096
   MaxRetransmit: 40
-  MaximizeSocketBuffers: 1
+  NonAlloc: 1
+  MaximizeSendReceiveBuffersToOSLimit: 1
   ReliableMaxMessageSize: 298449
   UnreliableMaxMessageSize: 1199
   debugLog: 0

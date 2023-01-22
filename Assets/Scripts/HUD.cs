@@ -9,12 +9,12 @@ using UnityEngine;
 public class HUD : MonoBehaviour
 {
     [SerializeField] TMP_Text addressField;
-    NetworkManager manager;
+    [SerializeField] NetworkManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        manager = GetComponentInChildren<NetworkManager>();        
+
     }
 
     public void Exit()
@@ -24,9 +24,7 @@ public class HUD : MonoBehaviour
     }
 
     public void Connect()
-    {
-        Debug.Log($"clicked connect: {addressField.text}");
-        manager.networkAddress = addressField.text;
+    {           
         manager.StartClient();
     }
 
@@ -34,5 +32,11 @@ public class HUD : MonoBehaviour
     {
         Debug.Log("clicked host");
         manager.StartHost();
+    }
+
+    public void valueChange(string value)
+    {
+        Debug.Log($"clicked connect: {value}");
+        manager.networkAddress = value;
     }
 }
