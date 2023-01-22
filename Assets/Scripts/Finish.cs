@@ -1,9 +1,10 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Finish : MonoBehaviour
+public class Finish : NetworkBehaviour
 {
 
     [SerializeField] Canvas endScreen;
@@ -11,14 +12,21 @@ public class Finish : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
+        if (!isServer) return;
         Debug.Log("entered Finish");
         Player player;
         if (col.TryGetComponent<Player>(out player))
         {
             if (player.hasFlag && player.team == goalForTeam)
             {
-                endScreen.gameObject.SetActive(true);
+                showEndScreen();
             }
         }
+    }
+
+    [ClientRpc]
+    void showEndScreen()
+    {
+        endScreen.gameObject.SetActive(true);
     }
 }

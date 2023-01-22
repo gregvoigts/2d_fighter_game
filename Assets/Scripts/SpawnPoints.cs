@@ -8,9 +8,18 @@ public class SpawnPoints : MonoBehaviour
 
     public Transform spawnTeam1;
     public Transform spawnTeam2;
+    public Transform flagSpawn;
 
-    private void Awake()
+    public void Awake()
     {
+        if(transform.position == Vector3.zero)
+        {
+            instance= this;
+        }
+    }
+    public void OnEnable()
+    {
+        instance.enabled = false;
         instance = this;
     }
 

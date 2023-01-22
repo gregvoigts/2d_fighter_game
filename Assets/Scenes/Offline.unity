@@ -167,7 +167,7 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 7598339820326515750, guid: eaf2081465c91494b9d1436aee9bf929, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 5456022182399805979, guid: 75a14d5329476ee479fb716cad1b642e, type: 3}
   - {fileID: 4657102787574329005, guid: 87d24a0ea1460a74095dff1546658455, type: 3}
@@ -176,7 +176,7 @@ MonoBehaviour:
   minPlayers: 1
   roomPlayerPrefab: {fileID: -5236573820521302711, guid: b6ce436c0d93d1941949e9177df45e4c, type: 3}
   RoomScene: Assets/Scenes/Room.unity
-  GameplayScene: Assets/Scenes/Start.unity
+  GameplayScene: Assets/Scenes/Game.unity
   _allPlayersReady: 0
   roomSlots: []
   clientIndex: 0
