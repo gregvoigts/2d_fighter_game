@@ -22,9 +22,4 @@ public class RoomCanvasUI : MonoBehaviour
     }
 
     public static RectTransform GetPlayersPanel() => instance.playersPanel;
-
-    public void debugClick()
-    {
-        Debug.Log("I was clicked!");
-    }
 }

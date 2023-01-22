@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-
-[RequireComponent(typeof(NetworkManager))]
 public class HUD : MonoBehaviour
 {
     [SerializeField] TMP_Text addressField;
@@ -19,8 +18,8 @@ public class HUD : MonoBehaviour
 
     public void Exit()
     {
-        //TODO implement me
-        Debug.Log("clicked exit");
+        Debug.Log("Attempt to close application...");
+        Application.Quit();
     }
 
     public void Connect()
@@ -38,5 +37,10 @@ public class HUD : MonoBehaviour
     {
         Debug.Log($"clicked connect: {value}");
         manager.networkAddress = value;
+    }
+
+    public void showCredits()
+    {
+        SceneManager.LoadScene("Credits");
     }
 }
