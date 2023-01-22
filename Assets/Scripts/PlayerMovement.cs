@@ -43,11 +43,13 @@ public class PlayerMovement : NetworkBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal");
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        player.weapon.animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
             animator.SetBool("isJumping", true);
+            player.weapon.animator.SetBool("isJumping", true);
         }
 
         if (Input.GetButtonDown("Squat"))
@@ -67,10 +69,12 @@ public class PlayerMovement : NetworkBehaviour
     public void onLanding()
     {
         animator.SetBool("isJumping", false);
+        player.weapon.animator.SetBool("isJumping", false);
     }
 
     public void onCrouching(bool isCrounching)
     {
         animator.SetBool("isCrouching", isCrounching);
+        player.weapon.animator.SetBool("isJumping", isCrounching);
     }
 }

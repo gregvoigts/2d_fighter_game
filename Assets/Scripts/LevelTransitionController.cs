@@ -1,16 +1,23 @@
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelTransitionController : MonoBehaviour
+public class LevelTransitionController : NetworkBehaviour
 {
     public bool IsNextLevel = false;
     public string SceneName = "Start";
+    [SerializeField] int goalForTeam;
 
     void OnTriggerEnter2D(Collider2D col){
-        if(col.transform.Find("Flag")?.gameObject?.activeSelf ?? false) {
-            SceneManager.LoadScene(SceneName);
+        if(!isServer) return;
+        Player player;
+        if(col.TryGetComponent<Player>(out player)) {
+            if (player.hasFlag && player.team == goalForTeam)
+            {
+                SceneManager.LoadScene(SceneName);
+            }
         }
     }
 }
