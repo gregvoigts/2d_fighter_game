@@ -535,8 +535,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  IsNextLevel: 0
-  SceneName: Start
+  spawnPoints: {fileID: 0}
   goalForTeam: 2
 --- !u!114 &1184973449
 MonoBehaviour:
@@ -656,8 +655,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  IsNextLevel: 0
-  SceneName: Start
+  spawnPoints: {fileID: 0}
   goalForTeam: 1
 --- !u!114 &1536882953
 MonoBehaviour:

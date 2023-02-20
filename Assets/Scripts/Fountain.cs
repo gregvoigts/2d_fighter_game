@@ -5,12 +5,10 @@ using UnityEngine;
 public class Fountain : MonoBehaviour
 {
     private bool active;
-    private GameObject[] fountains;
     
     // Start is called before the first frame update
     void Start()
     {
-        fountains = GameObject.FindGameObjectsWithTag("Fountain");
         Disable();
         StartCoroutine(Controller());
     }
@@ -40,26 +38,14 @@ public class Fountain : MonoBehaviour
 
     public void Enable()
     {
-        foreach(GameObject obj in fountains)
-        {
-            if (obj != null)
-            {
-                obj.SetActive(true);
-            }
-        }
+        gameObject.SetActive(true);
         active = true;
     }
 
     public void Disable()
     {
         active = false;
-        foreach(GameObject obj in fountains)
-        {
-            if (obj != null)
-            {
-                obj.SetActive(false);
-            }
-        }
+        gameObject.SetActive(false);
     }
 
     IEnumerator Controller()

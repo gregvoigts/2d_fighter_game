@@ -320,7 +320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4010966581480289685, guid: 4840fc0632284ba41a923f56a218d852, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4010966581480289685, guid: 4840fc0632284ba41a923f56a218d852, type: 3}
       propertyPath: m_LocalPosition.z
@@ -593,8 +593,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  IsNextLevel: 0
-  SceneName: Start
+  spawnPoints: {fileID: 0}
   goalForTeam: 1
 --- !u!114 &1500731568
 MonoBehaviour:
@@ -1153,8 +1152,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0.1
-  IsNextLevel: 0
-  SceneName: Start
+  spawnPoints: {fileID: 0}
   goalForTeam: 2
 --- !u!114 &2015894871
 MonoBehaviour:
@@ -1314,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4010966581480289685, guid: 4840fc0632284ba41a923f56a218d852, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4010966581480289685, guid: 4840fc0632284ba41a923f56a218d852, type: 3}
       propertyPath: m_LocalPosition.z
